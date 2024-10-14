@@ -48,7 +48,7 @@ Os microserviços são divididos da seguinte maneira:
 - **Elastic Stack (ELK)** é utilizado para logging distribuído e análise de logs.
 
 ## 10. Balanceamento de Carga e Gestão de Tráfego com Istio
-- Implementamos **Istio** para balanceamento de carga, gestão de tráfego, segurança (mTLS), e monitoramento de requisições.
+- implementar **Istio** para balanceamento de carga, gestão de tráfego, segurança (mTLS), e monitoramento de requisições.
 
 ---
 
