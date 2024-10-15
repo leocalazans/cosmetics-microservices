@@ -73,7 +73,7 @@ fastify.register(productRoutes);
 
 const start = async () => {
   try {
-    await fastify.listen({ port: 3000 });
+    await fastify.listen({ port: 3000, host: '0.0.0.0' });
     fastify.log.info(`Server running at http://localhost:3000`);
     await seedProducts(fastify.mongo.db);
     fastify.swagger(); 

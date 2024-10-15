@@ -71,7 +71,9 @@ services:
       - "8003:3000"
     environment:
       - MONGO_URI=mongodb://mongo:27017/costmeticos
-
+    networks:
+      - microservices_network
+      
 networks:
   microservices_network:
     driver: bridge
