@@ -1,26 +1,18 @@
-from sqlalchemy.orm import Session
-from app.database import SessionLocal, engine
-from app.models import Base
-from app.crud import create_user
-from app.schemas import UserCreate
+from app.database import SessionLocal
+from app.models import User
+from app.services import get_password_hash
 
-# Garante que todas as tabelas estão criadas
-Base.metadata.create_all(bind=engine)
+def create_demo_user():
+    db = SessionLocal()
+    demo_user = db.query(User).filter(User.username == "demo").first()
+    if not demo_user:
+        new_user = User(username="demo", email="demo@example.com", hashed_password=get_password_hash("password"))
+        db.add(new_user)
+        db.commit()
+        db.refresh(new_user)
+        print("Demo user created:", new_user.username)
+    else:
+        print("Demo user already exists")
 
-# Sessão de banco de dados
-db: Session = SessionLocal()
-
-# Dados do usuário demo
-user_data = UserCreate(username="demo_user", email="demo@cosmeticsstore.com", password="password123")
-
-# Verifica se o usuário já existe
-user = db.query(User).filter_by(email=user_data.email).first()
-if not user:
-    # Cria o usuário demo
-    create_user(db, user_data)
-    print(f"Usuário demo criado com sucesso: {user_data.username}")
-else:
-    print("Usuário demo já existe.")
-
-# Fechar sessão
-db.close()
+if __name__ == "__main__":
+    create_demo_user()
