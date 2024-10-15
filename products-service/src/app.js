@@ -35,8 +35,8 @@ fastify.register(swagger, {
   routePrefix: '/docs',  
   swagger: {
     info: {
-      title: 'API de Cosméticos',
-      description: 'Documentação da API para gerenciamento de cosméticos',
+      title: 'API Produtos',
+      description: 'Documentação da API para gerenciamento de produtos cosméticos',
       version: '1.0.0',
     },
     host: 'localhost:3000',

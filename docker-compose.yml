@@ -1,3 +1,4 @@
+version: '3.8'
 
 services:
   postgres:
@@ -32,7 +33,7 @@ services:
       - "15672:15672"  
       - "5672:5672"   
     networks:
-    - microservices_network
+      - microservices_network
 
   messaging-service:
     build:
@@ -73,7 +74,27 @@ services:
       - MONGO_URI=mongodb://mongo:27017/costmeticos
     networks:
       - microservices_network
-      
+
+  cart-service:
+    build:
+      context: ./cart-service  
+      dockerfile: Dockerfile   
+    ports:
+      - "8004:8000"
+    environment:
+      - DATABASE_URL=postgresql://user:password@postgres:5432/auth_db?sslmode=disable
+      - REDIS_URL=redis://redis:6379
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_USER=your_username
+      - RABBITMQ_PASSWORD=your_password
+    depends_on:
+      - postgres
+      - redis
+      - rabbitmq
+      - products-service
+    networks:
+      - microservices_network
+
 networks:
   microservices_network:
     driver: bridge

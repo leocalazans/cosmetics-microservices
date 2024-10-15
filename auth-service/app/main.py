@@ -2,7 +2,11 @@ from fastapi import FastAPI
 from app.routes import auth_router
 from app.database import Base, engine
 
-app = FastAPI()
+app = FastAPI( 
+    title="API Autenticação",
+    description="api para autenticação jwt",
+    version="1.0.0"
+    )
 
 # Criação automática das tabelas
 Base.metadata.create_all(bind=engine)

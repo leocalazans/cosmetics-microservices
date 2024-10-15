@@ -1,7 +1,9 @@
 from .rabbitmq import publish_message, consume_messages
 from fastapi import FastAPI
 
-app = FastAPI()
+app = FastAPI(title="API Menssageria",
+    description="Api para menssageria interna",
+    version="1.0.0")
 
 @app.on_event("startup")
 async def startup_event():
